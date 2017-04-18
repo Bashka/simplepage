@@ -1,0 +1,12 @@
+{
+  "name": "bashka/simplepage",
+  "type": "project",
+  "license": "GPL-3.0",
+  "authors": [
+      {
+          "name": "Artur Sh. Mamedbekov",
+          "email": "Artur-Mamedbekov@yandex.ru",
+          "homepage": "https://bashka.github.io"
+      }
+  ]
+}
