@@ -26,7 +26,7 @@ function i18n($string, $domain = null){
   global $sp;
 
   if(is_null($domain)){
-    $domain = isset($sp['i18n']['domain'])? $sp['i18n']['domain'] : '_locale';
+    $domain = $sp['i18n']['domain'];
   }
 
   $translate = i18n_load_translate($domain);
@@ -41,7 +41,7 @@ function i18n_plural($number, $plural, $domain = null){
   global $sp;
 
   if(is_null($domain)){
-    $domain = isset($sp['i18n']['domain'])? $sp['i18n']['domain'] : '_locale';
+    $domain = $sp['i18n']['domain'];
   }
 
   $translate = i18n_load_translate($domain);
@@ -54,4 +54,6 @@ function i18n_plural($number, $plural, $domain = null){
   return sprintf($plural, $number);
 }
 
-isset($sp['i18n']) || $sp['i18n'] = [];
+isset($sp['i18n']) || $sp['i18n'] = [
+  'domain' => '_locale',
+];
