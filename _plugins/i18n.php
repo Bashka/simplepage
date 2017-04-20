@@ -22,14 +22,14 @@ function i18n_load_translate($domain, $locale = null){
   return include($path);
 }
 
-function i18n($string, $domain = null){
+function i18n($string, $domain = null, $locale = null){
   global $sp;
 
   if(is_null($domain)){
     $domain = $sp['i18n']['domain'];
   }
 
-  $translate = i18n_load_translate($domain);
+  $translate = i18n_load_translate($domain, $locale);
   if(isset($translate[$string])){
     $string = $translate[$string];
   }
@@ -37,14 +37,14 @@ function i18n($string, $domain = null){
   return $string;
 }
 
-function i18n_plural($number, $plural, $domain = null){
+function i18n_plural($number, $plural, $domain = null, $locale = null){
   global $sp;
 
   if(is_null($domain)){
     $domain = $sp['i18n']['domain'];
   }
 
-  $translate = i18n_load_translate($domain);
+  $translate = i18n_load_translate($domain, $locale);
   if(isset($translate[$plural])){
     $plural = $translate[$plural][
       call_user_func($translate['']['plural_forms'], $number)
