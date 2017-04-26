@@ -34,19 +34,25 @@ function pdo_statement_build(PDO $pdo, $sql, array $config = []){
   $statement->setFetchMode(PDO::FETCH_CLASS, $prototype);
   if(isset($config['params'])){
     foreach($config['params'] as $name => $variable){
-      switch(gettype($variable)){
-        case 'NULL':
-          $type = PDO::PARAM_NULL;
-          break;
-        case 'boolean':
-          $type = PDO::PARAM_BOOL;
-          break;
-        case 'integer':
-        case 'double':
-          $type = PDO::PARAM_INT;
-          break;
-        default:
-          $type = PDO::PARAM_STR;
+      if(is_array($variable)){
+        $type = $variable['type'];
+        $variable = $variable['value'];
+      }
+      else{
+        switch(gettype($variable)){
+          case 'NULL':
+            $type = PDO::PARAM_NULL;
+            break;
+          case 'boolean':
+            $type = PDO::PARAM_BOOL;
+            break;
+          case 'integer':
+          case 'double':
+            $type = PDO::PARAM_INT;
+            break;
+          default:
+            $type = PDO::PARAM_STR;
+        }
       }
       $statement->bindValue($name, $variable, $type);
     }
